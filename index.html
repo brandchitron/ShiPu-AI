@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShiPu Bot Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .chatbox {
+            width: 400px;
+            max-width: 90%;
+            border-radius: 15px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .messages {
+            padding: 20px;
+            height: 300px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            position: relative;
+            max-width: 80%;
+            font-size: 14px;
+        }
+        .message.user {
+            align-self: flex-end;
+            background-color: #dcf8c6;
+        }
+        .message.bot {
+            align-self: flex-start;
+            background-color: #f0f0f0;
+        }
+        .input-box {
+            display: flex;
+            padding: 10px;
+            background-color: #f1f1f1;
+        }
+        .input-box input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            margin-right: 10px;
+        }
+        .input-box button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chatbox">
+        <div class="header">Chat with ShiPu Bot</div>
+        <div class="messages" id="messages"></div>
+        <div class="input-box">
+            <input type="text" id="userInput" placeholder="Type your message here...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <div class="footer">Created by Chitron Bhattacharjee &copy; 2024</div>
+
+    <script>
+        async function sendMessage() {
+            const userInput = document.getElementById('userInput').value;
+            if (!userInput) return;
+
+            // Display user's message
+            const messages = document.getElementById('messages');
+            const userMessage = document.createElement('div');
+            userMessage.classList.add('message', 'user');
+            userMessage.textContent = userInput;
+            messages.appendChild(userMessage);
+
+            // Clear input
+            document.getElementById('userInput').value = '';
+
+            // Fetch bot's response
+            try {
+                const response = await fetch('https://c-v2.onrender.com/api/chatgpt', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: userInput
+                    })
+                });
+
+                const data = await response.json();
+                const botMessage = document.createElement('div');
+                botMessage.classList.add('message', 'bot');
+                botMessage.textContent = data.response;
+                messages.appendChild(botMessage);
+
+            } catch (error) {
+                const errorMessage = document.createElement('div');
+                errorMessage.classList.add('message', 'bot');
+                errorMessage.textContent = 'Sorry, something went wrong.';
+                messages.appendChild(errorMessage);
+            }
+
+            // Scroll to the bottom of the chat
+            messages.scrollTop = messages.scrollHeight;
+        }
+    </script>
+</body>
+</html>
