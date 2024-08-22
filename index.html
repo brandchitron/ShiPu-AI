@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with ShiPu Bot</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', sans-serif;
+            background-color: #ffeb3b;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        header {
+            width: 100%;
+            background-color: #ff5722;
+            padding: 15px;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            border-bottom: 4px solid #e64a19;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #chatContainer {
+            width: 400px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #chatBox {
+            width: 100%;
+            height: 300px;
+            border: 3px solid #ff5722;
+            border-radius: 15px;
+            padding: 10px;
+            overflow-y: scroll;
+            margin-bottom: 10px;
+            background-color: #f0f4c3;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 15px;
+            max-width: 70%;
+            word-wrap: break-word;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .userMessage {
+            text-align: right;
+            background-color: #a5d6a7;
+            align-self: flex-end;
+            color: #0d47a1;
+        }
+        .botMessage {
+            text-align: left;
+            background-color: #ffcc80;
+            align-self: flex-start;
+            color: #d32f2f;
+        }
+        #userInput {
+            width: calc(100% - 60px);
+            padding: 15px;
+            border: 3px solid #ff5722;
+            border-radius: 15px;
+            outline: none;
+            font-size: 16px;
+        }
+        #sendButton {
+            width: 50px;
+            padding: 15px;
+            background-color: #8bc34a;
+            color: white;
+            border: 3px solid #4caf50;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s;
+        }
+        #sendButton:hover {
+            background-color: #4caf50;
+        }
+        footer {
+            width: 100%;
+            background-color: #ff5722;
+            padding: 10px;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            border-top: 4px solid #e64a19;
+            position: absolute;
+            bottom: 0;
+            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <header>Chat with ShiPu Bot - Created by Chitron Bhattacharjee</header>
+
+    <div id="chatContainer">
+        <div id="chatBox"></div>
+        <div style="display: flex; width: 100%;">
+            <input type="text" id="userInput" placeholder="Type your message here..." />
+            <button id="sendButton">Send</button>
+        </div>
+    </div>
+
+    <footer>&copy; 2024 Chitron Bhattacharjee. All rights reserved.</footer>
+
+    <script src="chat.js"></script>
+</body>
+</html>
